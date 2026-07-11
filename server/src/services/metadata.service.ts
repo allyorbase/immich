@@ -301,6 +301,7 @@ export class MetadataService extends BaseService {
       lensModel: getLensModel(exifTags),
       fNumber: validate(exifTags.FNumber),
       focalLength: validate(exifTags.FocalLength),
+      filmMode: exifTags.FilmMode == null ? null : String(exifTags.FilmMode).trim() || null,
 
       // comments
       description: String(exifTags.ImageDescription || exifTags.Description || '').trim(),

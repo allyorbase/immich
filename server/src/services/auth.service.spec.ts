@@ -651,6 +651,32 @@ describe(AuthService.name, () => {
     });
   });
 
+  describe('validate - development auth bypass', () => {
+    it('should authenticate as the admin when the development bypass is enabled', async () => {
+      const admin = UserFactory.create({ isAdmin: true });
+      const previousValue = process.env.IMMICH_DEV_BYPASS_AUTH;
+      process.env.IMMICH_DEV_BYPASS_AUTH = 'true';
+      mocks.config.isDev.mockReturnValue(true);
+      mocks.user.getAdmin.mockResolvedValue(admin);
+
+      try {
+        await expect(
+          sut.authenticate({
+            headers: {},
+            queryParams: {},
+            metadata: { adminRoute: false, sharedLinkRoute: false, uri: 'test' },
+          }),
+        ).resolves.toEqual({ user: admin });
+      } finally {
+        if (previousValue === undefined) {
+          delete process.env.IMMICH_DEV_BYPASS_AUTH;
+        } else {
+          process.env.IMMICH_DEV_BYPASS_AUTH = previousValue;
+        }
+      }
+    });
+  });
+
   describe('getMobileRedirect', () => {
     it('should pass along the query params', () => {
       expect(sut.getMobileRedirect('http://immich.app?code=123&state=456')).toEqual(

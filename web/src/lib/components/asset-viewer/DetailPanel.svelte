@@ -2,6 +2,7 @@
   import { goto } from '$app/navigation';
   import DetailPanelDate from '$lib/components/asset-viewer/DetailPanelDate.svelte';
   import DetailPanelDescription from '$lib/components/asset-viewer/DetailPanelDescription.svelte';
+  import DetailPanelFilmSimulation from '$lib/components/asset-viewer/DetailPanelFilmSimulation.svelte';
   import DetailPanelLocation from '$lib/components/asset-viewer/DetailPanelLocation.svelte';
   import DetailPanelRating from '$lib/components/asset-viewer/DetailPanelStarRating.svelte';
   import DetailPanelTags from '$lib/components/asset-viewer/DetailPanelTags.svelte';
@@ -272,6 +273,10 @@
             </div>
           </div>
         </div>
+      {/if}
+
+      {#if asset.exifInfo?.filmMode}
+        <DetailPanelFilmSimulation filmMode={asset.exifInfo.filmMode} />
       {/if}
 
       <DetailPanelLocation {isOwner} {asset} />

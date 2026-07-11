@@ -803,6 +803,8 @@ export type ExifResponseDto = {
     fNumber?: number | null;
     /** File size in bytes */
     fileSizeInByte?: number | null;
+    /** Camera film simulation mode */
+    filmMode?: string | null;
     /** Focal length in mm */
     focalLength?: number | null;
     /** ISO sensitivity */

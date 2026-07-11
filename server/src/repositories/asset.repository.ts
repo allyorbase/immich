@@ -286,6 +286,7 @@ export class AssetRepository {
                 lensModel: ref('lensModel'),
                 fNumber: ref('fNumber'),
                 focalLength: ref('focalLength'),
+                filmMode: ref('filmMode'),
                 iso: ref('iso'),
                 exposureTime: ref('exposureTime'),
                 profileDescription: ref('profileDescription'),

@@ -505,6 +505,7 @@ export const columns = {
     'asset_exif.fileSizeInByte',
     'asset_exif.fNumber',
     'asset_exif.focalLength',
+    'asset_exif.filmMode',
     'asset_exif.fps',
     'asset_exif.iso',
     'asset_exif.latitude',

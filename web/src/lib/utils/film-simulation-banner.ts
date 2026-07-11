@@ -1,0 +1,331 @@
+export type FilmSimulationBannerId =
+  | 'acros'
+  | 'astia'
+  | 'classicNeg'
+  | 'eterna'
+  | 'eternaBleachBypass'
+  | 'monochrome'
+  | 'nostalgicNeg'
+  | 'proNegHi'
+  | 'proNegStd'
+  | 'provia'
+  | 'realaAce'
+  | 'sepia'
+  | 'velvia';
+
+export type FilmSimulationParameter = {
+  top: string;
+  bottom: string;
+};
+
+export type FilmSimulationBannerConfig = {
+  id: FilmSimulationBannerId;
+  displayName: string;
+  monogram: string;
+  counterStart: number;
+  counterEnd: number;
+  scaleLabels: [string, string, string, string];
+  panel: string;
+  primary: string;
+  secondary: string;
+  paper: string;
+  ink: string;
+  parameters: [
+    FilmSimulationParameter,
+    FilmSimulationParameter,
+    FilmSimulationParameter,
+    FilmSimulationParameter,
+    FilmSimulationParameter,
+    FilmSimulationParameter,
+  ];
+  description: string;
+};
+
+export const filmSimulationBannerConfigs: Record<FilmSimulationBannerId, FilmSimulationBannerConfig> = {
+  provia: {
+    id: 'provia',
+    displayName: 'PROVIA',
+    monogram: 'PR',
+    counterStart: 36,
+    counterEnd: 0,
+    scaleLabels: ['36', '24', '12', '0'],
+    panel: '#171923',
+    primary: '#faeb5c',
+    secondary: '#00bb16',
+    paper: '#f9f9f9',
+    ink: '#1925ab',
+    parameters: [
+      { top: 'SIM', bottom: 'PRV' },
+      { top: 'FILM', bottom: '100F' },
+      { top: 'TYPE', bottom: 'RVP' },
+      { top: 'BAL', bottom: 'DAY' },
+      { top: 'PROC', bottom: 'E-6' },
+      { top: 'MODE', bottom: 'STD' },
+    ],
+    description: 'PROVIA banner inspired by FUJICHROME PROVIA 100F professional color-reversal film.',
+  },
+  velvia: {
+    id: 'velvia',
+    displayName: 'Velvia',
+    monogram: 'V',
+    counterStart: 36,
+    counterEnd: 0,
+    scaleLabels: ['36', '24', '12', '0'],
+    panel: '#102116',
+    primary: '#f9f9f9',
+    secondary: '#0064bc',
+    paper: '#f9f9f9',
+    ink: '#00bc16',
+    parameters: [
+      { top: 'SIM', bottom: 'VLV' },
+      { top: 'STOCK', bottom: 'RVP' },
+      { top: 'ISO', bottom: '50' },
+      { top: 'BAL', bottom: 'DAY' },
+      { top: 'PROC', bottom: 'E-6' },
+      { top: 'LOOK', bottom: 'VIVID' },
+    ],
+    description: 'Velvia banner inspired by the original FUJICHROME Velvia RVP 50 color-reversal film.',
+  },
+  astia: {
+    id: 'astia',
+    displayName: 'ASTIA',
+    monogram: 'AS',
+    counterStart: 36,
+    counterEnd: 0,
+    scaleLabels: ['36', '24', '12', '0'],
+    panel: '#171a34',
+    primary: '#a99158',
+    secondary: '#e30012',
+    paper: '#f9f9f9',
+    ink: '#1925ac',
+    parameters: [
+      { top: 'SIM', bottom: 'AST' },
+      { top: 'FILM', bottom: '100F' },
+      { top: 'TYPE', bottom: 'RAP' },
+      { top: 'BAL', bottom: 'DAY' },
+      { top: 'SKIN', bottom: 'SOFT' },
+      { top: 'GRAIN', bottom: 'RMS7' },
+    ],
+    description: 'ASTIA banner inspired by FUJICHROME ASTIA 100F professional portrait reversal film.',
+  },
+  realaAce: {
+    id: 'realaAce',
+    displayName: 'REALA ACE',
+    monogram: 'RA',
+    counterStart: 36,
+    counterEnd: 0,
+    scaleLabels: ['36', '24', '12', '0'],
+    panel: '#11130c',
+    primary: '#dfb800',
+    secondary: '#00bc16',
+    paper: '#feffff',
+    ink: '#000001',
+    parameters: [
+      { top: 'SIM', bottom: 'RA' },
+      { top: 'ISO', bottom: '100' },
+      { top: 'BAL', bottom: 'DAY' },
+      { top: 'LAYER', bottom: '4TH' },
+      { top: 'TONE', bottom: 'SOFT' },
+      { top: 'PRINT', bottom: 'ACE' },
+    ],
+    description: 'REALA ACE banner inspired by the ISO 100 color-negative film and its fourth color-sensitive layer.',
+  },
+  classicNeg: {
+    id: 'classicNeg',
+    displayName: 'CLASSIC Neg.',
+    monogram: 'CN',
+    counterStart: 36,
+    counterEnd: 0,
+    scaleLabels: ['36', '24', '12', '0'],
+    panel: '#10170f',
+    primary: '#f7db30',
+    secondary: '#1f70ff',
+    paper: '#f3e7b4',
+    ink: '#00bd16',
+    parameters: [
+      { top: 'SIM', bottom: 'CN' },
+      { top: 'FILM', bottom: '135' },
+      { top: 'ISO', bottom: '400' },
+      { top: 'BAL', bottom: 'DAY' },
+      { top: 'PROC', bottom: 'C-41' },
+      { top: 'EXP', bottom: '36' },
+    ],
+    description: 'CLASSIC Neg. banner inspired by Fujicolor SUPERIA consumer color-negative film.',
+  },
+  nostalgicNeg: {
+    id: 'nostalgicNeg',
+    displayName: 'NOSTALGIC Neg.',
+    monogram: 'NN',
+    counterStart: 70,
+    counterEnd: 60,
+    scaleLabels: ['70', '67', '64', '60'],
+    panel: '#10170e',
+    primary: '#ffb900',
+    secondary: '#fe0000',
+    paper: '#f9f9f9',
+    ink: '#00bf16',
+    parameters: [
+      { top: 'SIM', bottom: 'NN' },
+      { top: 'ERA', bottom: '70s' },
+      { top: 'HI', bottom: 'AMBR' },
+      { top: 'SHD', bottom: 'RICH' },
+      { top: 'LOOK', bottom: 'PRINT' },
+      { top: 'MOOD', bottom: 'MEM' },
+    ],
+    description: 'NOSTALGIC Neg. banner inspired by New American Color and amber-toned printed photographs.',
+  },
+  proNegHi: {
+    id: 'proNegHi',
+    displayName: 'PRO Neg. Hi',
+    monogram: 'NH',
+    counterStart: 12,
+    counterEnd: 0,
+    scaleLabels: ['12', '09', '06', '00'],
+    panel: '#161a16',
+    primary: '#bea266',
+    secondary: '#c34b94',
+    paper: '#f4e5bd',
+    ink: '#137d3a',
+    parameters: [
+      { top: 'SIM', bottom: 'NH' },
+      { top: 'ISO', bottom: '160' },
+      { top: 'ROLL', bottom: '120' },
+      { top: 'BAL', bottom: 'DAY' },
+      { top: 'PROC', bottom: 'CN16' },
+      { top: 'GRAIN', bottom: 'RMS3' },
+    ],
+    description: 'PRO Neg. Hi banner inspired by Fujicolor PRO160NH professional color-negative film.',
+  },
+  proNegStd: {
+    id: 'proNegStd',
+    displayName: 'PRO Neg. Std',
+    monogram: 'NS',
+    counterStart: 12,
+    counterEnd: 0,
+    scaleLabels: ['12', '09', '06', '00'],
+    panel: '#1e1e1e',
+    primary: '#a7a7a8',
+    secondary: '#9c0d5a',
+    paper: '#f8f8f8',
+    ink: '#262626',
+    parameters: [
+      { top: 'SIM', bottom: 'STD' },
+      { top: 'ISO', bottom: '160' },
+      { top: 'ROLL', bottom: '120' },
+      { top: 'TONE', bottom: 'SOFT' },
+      { top: 'SKIN', bottom: 'NTRL' },
+      { top: 'GRAIN', bottom: 'FINE' },
+    ],
+    description: 'PRO Neg. Std banner inspired by Fujicolor NS160 and PRO160NS studio portrait negative film.',
+  },
+  eterna: {
+    id: 'eterna',
+    displayName: 'ETERNA',
+    monogram: '500T',
+    counterStart: 23,
+    counterEnd: 0,
+    scaleLabels: ['23', '16', '08', '00'],
+    panel: '#282828',
+    primary: '#b89a68',
+    secondary: '#e75514',
+    paper: '#f2e3c1',
+    ink: '#282828',
+    parameters: [
+      { top: 'SIM', bottom: 'ETN' },
+      { top: 'EI', bottom: '500' },
+      { top: 'BAL', bottom: 'TUNG' },
+      { top: 'RATE', bottom: '24' },
+      { top: 'TYPE', bottom: 'NEG' },
+      { top: 'LOOK', bottom: 'CINE' },
+    ],
+    description: 'ETERNA banner inspired by Fujifilm ETERNA 500 tungsten motion-picture negative film.',
+  },
+  eternaBleachBypass: {
+    id: 'eternaBleachBypass',
+    displayName: 'ETERNA BLEACH BYPASS',
+    monogram: 'BB',
+    counterStart: 36,
+    counterEnd: 0,
+    scaleLabels: ['36', '24', '12', '0'],
+    panel: '#181a1a',
+    primary: '#bac8ce',
+    secondary: '#ea4b12',
+    paper: '#f4f4f1',
+    ink: '#292827',
+    parameters: [
+      { top: 'SIM', bottom: 'EBB' },
+      { top: 'PROC', bottom: 'Ag' },
+      { top: 'COLOR', bottom: 'LOW' },
+      { top: 'CNTR', bottom: 'HI' },
+      { top: 'CINE', bottom: 'JP' },
+      { top: 'GATE', bottom: '16:9' },
+    ],
+    description: 'ETERNA motion-picture identity combined with the cold, silver-retention bleach-bypass process.',
+  },
+  acros: {
+    id: 'acros',
+    displayName: 'ACROS',
+    monogram: 'A',
+    counterStart: 36,
+    counterEnd: 0,
+    scaleLabels: ['36', '24', '12', '0'],
+    panel: '#090b09',
+    primary: '#b7bab8',
+    secondary: '#00b54a',
+    paper: '#f3f3ee',
+    ink: '#202321',
+    parameters: [
+      { top: 'SIM', bottom: 'ACR' },
+      { top: 'FILM', bottom: '100' },
+      { top: 'FILTER', bottom: 'Ø' },
+      { top: 'TONE', bottom: 'RICH' },
+      { top: 'GRAIN', bottom: 'FINE' },
+      { top: 'PRINT', bottom: 'SILV' },
+    ],
+    description: 'ACROS banner inspired by NEOPAN 100 ACROS black-and-white film and silver-halide prints.',
+  },
+  monochrome: {
+    id: 'monochrome',
+    displayName: 'MONOCHROME',
+    monogram: 'BW',
+    counterStart: 36,
+    counterEnd: 0,
+    scaleLabels: ['36', '24', '12', '0'],
+    panel: '#161616',
+    primary: '#b8b8b8',
+    secondary: '#f0f0ed',
+    paper: '#f7f7f4',
+    ink: '#282828',
+    parameters: [
+      { top: 'SIM', bottom: 'MONO' },
+      { top: 'FILTER', bottom: 'Ø' },
+      { top: 'TONE', bottom: 'STD' },
+      { top: 'HI', bottom: 'NTRL' },
+      { top: 'SHD', bottom: 'NTRL' },
+      { top: 'COLOR', bottom: 'OFF' },
+    ],
+    description: 'MONOCHROME film simulation banner with neutral black-and-white camera and print controls.',
+  },
+  sepia: {
+    id: 'sepia',
+    displayName: 'SEPIA',
+    monogram: 'SP',
+    counterStart: 0,
+    counterEnd: 99,
+    scaleLabels: ['00', '33', '66', '99'],
+    panel: '#26170b',
+    primary: '#d6a35a',
+    secondary: '#6b350b',
+    paper: '#f0d19a',
+    ink: '#422006',
+    parameters: [
+      { top: 'SIM', bottom: 'SEP' },
+      { top: 'PROCESS', bottom: 'TONE' },
+      { top: 'PAPER', bottom: 'WARM' },
+      { top: 'HI', bottom: 'CREAM' },
+      { top: 'SHD', bottom: 'BROWN' },
+      { top: 'COLOR', bottom: 'MONO' },
+    ],
+    description: 'SEPIA film simulation banner inspired by historical warm-brown photographic toning.',
+  },
+};
