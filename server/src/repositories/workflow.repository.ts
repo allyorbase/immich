@@ -157,6 +157,7 @@ export class WorkflowRepository {
               'asset_exif.lensModel',
               'asset_exif.fNumber',
               'asset_exif.focalLength',
+              'asset_exif.filmMode',
               'asset_exif.iso',
               'asset_exif.latitude',
               'asset_exif.longitude',

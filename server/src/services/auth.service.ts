@@ -267,6 +267,13 @@ export class AuthService extends BaseService {
       return this.validateApiKey(apiKey);
     }
 
+    if (this.configRepository.isDev() && process.env.IMMICH_DEV_BYPASS_AUTH === 'true') {
+      const user = await this.userRepository.getAdmin();
+      if (user) {
+        return { user };
+      }
+    }
+
     throw new UnauthorizedException('Authentication required');
   }
 

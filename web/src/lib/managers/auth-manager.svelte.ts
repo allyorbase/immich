@@ -9,6 +9,7 @@ import {
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
 import { page } from '$app/state';
+import { env } from '$env/dynamic/public';
 import { eventManager } from '$lib/managers/event-manager.svelte';
 import { Route } from '$lib/route';
 import { isSharedLinkRoute } from '$lib/utils/navigation';
@@ -121,6 +122,10 @@ class AuthManager {
   #hasAuthCookie() {
     if (!browser) {
       return;
+    }
+
+    if (env.PUBLIC_IMMICH_DEV_BYPASS_AUTH === 'true') {
+      return true;
     }
 
     for (const cookie of document.cookie.split('; ')) {

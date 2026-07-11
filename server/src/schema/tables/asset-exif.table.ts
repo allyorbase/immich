@@ -56,6 +56,9 @@ export class AssetExifTable {
   @Column({ type: 'double precision', nullable: true })
   focalLength!: number | null;
 
+  @Column({ type: 'character varying', nullable: true })
+  filmMode!: string | null;
+
   @Column({ type: 'integer', nullable: true })
   iso!: number | null;
 

@@ -28,6 +28,7 @@ export class AssetExifFactory {
       fileSizeInByte: 69,
       fNumber: 1.7,
       focalLength: 4.38,
+      filmMode: null,
       fps: null,
       iso: 947,
       latitude: 30.267_334_570_570_195,
