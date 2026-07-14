@@ -13,6 +13,7 @@ part of openapi.api;
 class QueuesResponseLegacyDto {
   /// Returns a new [QueuesResponseLegacyDto] instance.
   QueuesResponseLegacyDto({
+    required this.assetStacking,
     required this.backgroundTask,
     required this.backupDatabase,
     required this.duplicateDetection,
@@ -33,6 +34,8 @@ class QueuesResponseLegacyDto {
     required this.videoConversion,
     required this.workflow,
   });
+
+  QueueResponseLegacyDto assetStacking;
 
   QueueResponseLegacyDto backgroundTask;
 
@@ -74,6 +77,7 @@ class QueuesResponseLegacyDto {
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is QueuesResponseLegacyDto &&
+    other.assetStacking == assetStacking &&
     other.backgroundTask == backgroundTask &&
     other.backupDatabase == backupDatabase &&
     other.duplicateDetection == duplicateDetection &&
@@ -97,6 +101,7 @@ class QueuesResponseLegacyDto {
   @override
   int get hashCode =>
     // ignore: unnecessary_parenthesis
+    (assetStacking.hashCode) +
     (backgroundTask.hashCode) +
     (backupDatabase.hashCode) +
     (duplicateDetection.hashCode) +
@@ -118,10 +123,11 @@ class QueuesResponseLegacyDto {
     (workflow.hashCode);
 
   @override
-  String toString() => 'QueuesResponseLegacyDto[backgroundTask=$backgroundTask, backupDatabase=$backupDatabase, duplicateDetection=$duplicateDetection, editor=$editor, faceDetection=$faceDetection, facialRecognition=$facialRecognition, integrityCheck=$integrityCheck, library_=$library_, metadataExtraction=$metadataExtraction, migration=$migration, notifications=$notifications, ocr=$ocr, search=$search, sidecar=$sidecar, smartSearch=$smartSearch, storageTemplateMigration=$storageTemplateMigration, thumbnailGeneration=$thumbnailGeneration, videoConversion=$videoConversion, workflow=$workflow]';
+  String toString() => 'QueuesResponseLegacyDto[assetStacking=$assetStacking, backgroundTask=$backgroundTask, backupDatabase=$backupDatabase, duplicateDetection=$duplicateDetection, editor=$editor, faceDetection=$faceDetection, facialRecognition=$facialRecognition, integrityCheck=$integrityCheck, library_=$library_, metadataExtraction=$metadataExtraction, migration=$migration, notifications=$notifications, ocr=$ocr, search=$search, sidecar=$sidecar, smartSearch=$smartSearch, storageTemplateMigration=$storageTemplateMigration, thumbnailGeneration=$thumbnailGeneration, videoConversion=$videoConversion, workflow=$workflow]';
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
+      json[r'assetStacking'] = this.assetStacking;
       json[r'backgroundTask'] = this.backgroundTask;
       json[r'backupDatabase'] = this.backupDatabase;
       json[r'duplicateDetection'] = this.duplicateDetection;
@@ -153,6 +159,7 @@ class QueuesResponseLegacyDto {
       final json = value.cast<String, dynamic>();
 
       return QueuesResponseLegacyDto(
+        assetStacking: QueueResponseLegacyDto.fromJson(json[r'assetStacking'])!,
         backgroundTask: QueueResponseLegacyDto.fromJson(json[r'backgroundTask'])!,
         backupDatabase: QueueResponseLegacyDto.fromJson(json[r'backupDatabase'])!,
         duplicateDetection: QueueResponseLegacyDto.fromJson(json[r'duplicateDetection'])!,
@@ -219,6 +226,7 @@ class QueuesResponseLegacyDto {
 
   /// The list of required keys that must be present in a JSON.
   static const requiredKeys = <String>{
+    'assetStacking',
     'backgroundTask',
     'backupDatabase',
     'duplicateDetection',

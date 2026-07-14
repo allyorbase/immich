@@ -790,6 +790,7 @@ export enum BootstrapEventPriority {
 }
 
 export enum QueueName {
+  AssetStacking = 'assetStacking',
   ThumbnailGeneration = 'thumbnailGeneration',
   MetadataExtraction = 'metadataExtraction',
   VideoConversion = 'videoConversion',
@@ -825,6 +826,7 @@ export enum QueueJobStatus {
 export const QueueJobStatusSchema = z.enum(QueueJobStatus).describe('Queue job status').meta({ id: 'QueueJobStatus' });
 
 export enum JobName {
+  AssetStacking = 'AssetStacking',
   AssetDelete = 'AssetDelete',
   AssetDeleteCheck = 'AssetDeleteCheck',
   AssetDetectFacesQueueAll = 'AssetDetectFacesQueueAll',

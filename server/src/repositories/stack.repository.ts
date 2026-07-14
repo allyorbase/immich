@@ -4,6 +4,7 @@ import { jsonArrayFrom } from 'kysely/helpers/postgres';
 import { InjectKysely } from 'nestjs-kysely';
 import { columns } from 'src/database';
 import { DummyValue, GenerateSql } from 'src/decorators';
+import { AssetStatus, AssetType } from 'src/enum';
 import { DB } from 'src/schema';
 import { StackTable } from 'src/schema/tables/stack.table';
 import { asUuid, withDefaultVisibility } from 'src/utils/database';
@@ -48,6 +49,18 @@ const withAssets = (eb: ExpressionBuilder<DB, 'stack'>, withTags = false) => {
 @Injectable()
 export class StackRepository {
   constructor(@InjectKysely() private db: Kysely<DB>) {}
+
+  @GenerateSql({ params: [], stream: true })
+  streamForAutomaticStacking() {
+    return this.db
+      .selectFrom('asset')
+      .select(['id', 'ownerId', 'originalFileName', 'localDateTime', 'visibility'])
+      .where('type', '=', AssetType.Image)
+      .where('status', '=', AssetStatus.Active)
+      .where('deletedAt', 'is', null)
+      .where('stackId', 'is', null)
+      .stream();
+  }
 
   @GenerateSql({ params: [{ ownerId: DummyValue.UUID }] })
   search(query: StackSearch) {

@@ -19,6 +19,7 @@ const QueueResponseLegacySchema = z
 
 const QueuesResponseLegacySchema = z
   .object({
+    [QueueName.AssetStacking]: QueueResponseLegacySchema,
     [QueueName.ThumbnailGeneration]: QueueResponseLegacySchema,
     [QueueName.MetadataExtraction]: QueueResponseLegacySchema,
     [QueueName.VideoConversion]: QueueResponseLegacySchema,

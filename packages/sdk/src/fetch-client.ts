@@ -1231,6 +1231,7 @@ export type QueueResponseLegacyDto = {
     queueStatus: QueueStatusLegacyDto;
 };
 export type QueuesResponseLegacyDto = {
+    assetStacking: QueueResponseLegacyDto;
     backgroundTask: QueueResponseLegacyDto;
     backupDatabase: QueueResponseLegacyDto;
     duplicateDetection: QueueResponseLegacyDto;
@@ -7381,6 +7382,7 @@ export enum ManualJobName {
     IntegrityChecksumMismatchDeleteAll = "integrity-checksum-mismatch-delete-all"
 }
 export enum QueueName {
+    AssetStacking = "assetStacking",
     ThumbnailGeneration = "thumbnailGeneration",
     MetadataExtraction = "metadataExtraction",
     VideoConversion = "videoConversion",
@@ -7436,6 +7438,7 @@ export enum QueueJobStatus {
     Paused = "paused"
 }
 export enum JobName {
+    AssetStacking = "AssetStacking",
     AssetDelete = "AssetDelete",
     AssetDeleteCheck = "AssetDeleteCheck",
     AssetDetectFacesQueueAll = "AssetDetectFacesQueueAll",

@@ -23,6 +23,7 @@ class QueueName {
 
   String toJson() => value;
 
+  static const assetStacking = QueueName._(r'assetStacking');
   static const thumbnailGeneration = QueueName._(r'thumbnailGeneration');
   static const metadataExtraction = QueueName._(r'metadataExtraction');
   static const videoConversion = QueueName._(r'videoConversion');
@@ -45,6 +46,7 @@ class QueueName {
 
   /// List of all possible values in this [enum][QueueName].
   static const values = <QueueName>[
+    assetStacking,
     thumbnailGeneration,
     metadataExtraction,
     videoConversion,
@@ -102,6 +104,7 @@ class QueueNameTypeTransformer {
   QueueName? decode(dynamic data, {bool allowNull = true}) {
     if (data != null) {
       switch (data) {
+        case r'assetStacking': return QueueName.assetStacking;
         case r'thumbnailGeneration': return QueueName.thumbnailGeneration;
         case r'metadataExtraction': return QueueName.metadataExtraction;
         case r'videoConversion': return QueueName.videoConversion;

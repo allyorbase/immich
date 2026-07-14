@@ -19247,6 +19247,7 @@
       "JobName": {
         "description": "Job name",
         "enum": [
+          "AssetStacking",
           "AssetDelete",
           "AssetDeleteCheck",
           "AssetDetectFacesQueueAll",
@@ -21567,6 +21568,7 @@
       "QueueName": {
         "description": "Queue name",
         "enum": [
+          "assetStacking",
           "thumbnailGeneration",
           "metadataExtraction",
           "videoConversion",
@@ -21701,6 +21703,9 @@
       },
       "QueuesResponseLegacyDto": {
         "properties": {
+          "assetStacking": {
+            "$ref": "#/components/schemas/QueueResponseLegacyDto"
+          },
           "backgroundTask": {
             "$ref": "#/components/schemas/QueueResponseLegacyDto"
           },
@@ -21760,6 +21765,7 @@
           }
         },
         "required": [
+          "assetStacking",
           "backgroundTask",
           "backupDatabase",
           "duplicateDetection",

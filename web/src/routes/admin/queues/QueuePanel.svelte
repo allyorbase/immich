@@ -33,6 +33,9 @@
   };
 
   const queueDetails: Partial<Record<QueueName, QueueDetails>> = {
+    [QueueName.AssetStacking]: {
+      missingText: $t('start'),
+    },
     [QueueName.ThumbnailGeneration]: {
       allText: $t('all'),
       missingText: $t('missing'),

@@ -31,6 +31,7 @@
   }
 
   const queueTitles: Record<QueueName, string> = $derived({
+    [QueueName.AssetStacking]: $t('admin.asset_stacking_job'),
     [QueueName.ThumbnailGeneration]: $t('admin.thumbnail_generation_job'),
     [QueueName.MetadataExtraction]: $t('admin.metadata_extraction_job'),
     [QueueName.Sidecar]: $t('admin.sidecar_job'),

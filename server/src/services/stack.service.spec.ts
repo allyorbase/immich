@@ -1,4 +1,5 @@
 import { BadRequestException } from '@nestjs/common';
+import { AssetVisibility, JobStatus } from 'src/enum';
 import { StackService } from 'src/services/stack.service';
 import { AssetFactory } from 'test/factories/asset.factory';
 import { AuthFactory } from 'test/factories/auth.factory';
@@ -6,7 +7,7 @@ import { StackFactory } from 'test/factories/stack.factory';
 import { authStub } from 'test/fixtures/auth.stub';
 import { getForStack } from 'test/mappers';
 import { newUuid } from 'test/small.factory';
-import { newTestService, ServiceMocks } from 'test/utils';
+import { makeStream, newTestService, ServiceMocks } from 'test/utils';
 
 describe(StackService.name, () => {
   let sut: StackService;
@@ -18,6 +19,60 @@ describe(StackService.name, () => {
 
   it('should be defined', () => {
     expect(sut).toBeDefined();
+  });
+
+  describe('handleAutomaticStacking', () => {
+    const ownerId = newUuid();
+    const localDateTime = new Date('2026-07-13T12:00:00.000Z');
+
+    const asset = (originalFileName: string, overrides: Parameters<typeof AssetFactory.create>[0] = {}) =>
+      AssetFactory.create({ ownerId, localDateTime, originalFileName, ...overrides });
+
+    it('should stack RAW, JPEG, and HEIF variants with the lowest numbered JPEG as primary', async () => {
+      const raw = asset('_DSF7080.raf');
+      const jpeg2 = asset('_DSF7080-2.JPG');
+      const jpeg10 = asset('_DSF7080-10.jpeg');
+      const heif = asset('_DSF7080.HEIF');
+
+      mocks.stack.streamForAutomaticStacking.mockReturnValue(makeStream([raw, jpeg10, heif, jpeg2]));
+      mocks.stack.create.mockResolvedValue({ id: 'stack-id' } as never);
+
+      await expect(sut.handleAutomaticStacking()).resolves.toBe(JobStatus.Success);
+
+      expect(mocks.stack.create).toHaveBeenCalledWith({ ownerId }, [jpeg2.id, jpeg10.id, heif.id, raw.id]);
+      expect(mocks.event.emit).toHaveBeenCalledWith('StackCreate', { stackId: 'stack-id', userId: ownerId });
+    });
+
+    it('should prefer an unnumbered JPEG, then HEIF and other rendered images over RAW', async () => {
+      const raw = asset('photo.RAF');
+      const png = asset('PHOTO.png');
+      const heif = asset('photo-2.heic');
+      const numberedJpeg = asset('photo-1.jpg');
+      const jpeg = asset('photo.JPEG');
+
+      mocks.stack.streamForAutomaticStacking.mockReturnValue(makeStream([raw, png, heif, numberedJpeg, jpeg]));
+      mocks.stack.create.mockResolvedValue({ id: 'stack-id' } as never);
+
+      await sut.handleAutomaticStacking();
+
+      expect(mocks.stack.create).toHaveBeenCalledWith({ ownerId }, [jpeg.id, numberedJpeg.id, heif.id, png.id, raw.id]);
+    });
+
+    it('should keep owners, visibility, and capture dates in separate groups', async () => {
+      const assets = [
+        asset('photo.raf'),
+        asset('photo.jpg', { ownerId: newUuid() }),
+        asset('photo.heif', { visibility: AssetVisibility.Archive }),
+        asset('photo.png', { localDateTime: new Date('2026-07-14T12:00:00.000Z') }),
+      ];
+
+      mocks.stack.streamForAutomaticStacking.mockReturnValue(makeStream(assets));
+
+      await sut.handleAutomaticStacking();
+
+      expect(mocks.stack.create).not.toHaveBeenCalled();
+      expect(mocks.event.emit).not.toHaveBeenCalled();
+    });
   });
 
   describe('search', () => {
