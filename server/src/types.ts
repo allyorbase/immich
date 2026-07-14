@@ -214,6 +214,7 @@ export interface VideoInterfaces {
 
 export type ConcurrentQueueName = Exclude<
   QueueName,
+  | QueueName.AssetStacking
   | QueueName.StorageTemplateMigration
   | QueueName.FacialRecognition
   | QueueName.DuplicateDetection
@@ -359,6 +360,9 @@ export interface JobCounts {
 }
 
 export type JobItem =
+  // Asset Stacking
+  | { name: JobName.AssetStacking; data?: IBaseJob }
+
   // Audit
   | { name: JobName.AuditTableCleanup; data?: IBaseJob }
 

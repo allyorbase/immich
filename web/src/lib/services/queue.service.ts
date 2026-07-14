@@ -19,6 +19,7 @@ import {
   mdiFileXmlBox,
   mdiFolderMove,
   mdiImageSearch,
+  mdiImageMultipleOutline,
   mdiLibraryShelves,
   mdiOcr,
   mdiPause,
@@ -163,6 +164,11 @@ const handleRemoveFailedJobs = async (queue: QueueResponseDto) => {
 export const asQueueItem = ($t: MessageFormatter, queue: { name: QueueName }): QueueItem => {
   // TODO merge this mapping with data from QueuePanel.svelte
   const items: Record<QueueName, QueueItem> = {
+    [QueueName.AssetStacking]: {
+      icon: mdiImageMultipleOutline,
+      title: $t('admin.asset_stacking_job'),
+      subtitle: $t('admin.asset_stacking_job_description'),
+    },
     [QueueName.ThumbnailGeneration]: {
       icon: mdiFileJpgBox,
       title: $t('admin.thumbnail_generation_job'),

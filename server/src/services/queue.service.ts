@@ -198,6 +198,10 @@ export class QueueService extends BaseService {
     await this.eventRepository.emit('QueueStart', { name });
 
     switch (name) {
+      case QueueName.AssetStacking: {
+        return this.jobRepository.queue({ name: JobName.AssetStacking });
+      }
+
       case QueueName.VideoConversion: {
         return this.jobRepository.queue({ name: JobName.AssetEncodeVideoQueueAll, data: { force } });
       }
@@ -258,6 +262,7 @@ export class QueueService extends BaseService {
 
   private isConcurrentQueue(name: QueueName): name is ConcurrentQueueName {
     return ![
+      QueueName.AssetStacking,
       QueueName.FacialRecognition,
       QueueName.StorageTemplateMigration,
       QueueName.DuplicateDetection,
